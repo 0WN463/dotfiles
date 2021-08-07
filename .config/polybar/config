@@ -1,0 +1,366 @@
+;-------------------------------------------------
+;                                                ;
+;           POLYBAR CONFIG FOR CYBERPUNK         ;
+;                                                ;
+;-------------------------------------------------
+
+;-------------------------------------------------
+;                                                ;
+;          			COLORS 				         ;
+;                                                ;
+;-------------------------------------------------
+[colors]
+background = #16060B
+foreground = #798D8F 
+blue  = #244E64 
+cyan  = #00FFFF 
+white = #FFFFFF
+green = #00FF00
+yellow = #FFFF00
+orange = #FFA500
+red = #FF0000
+grey = #555588
+
+pale_green = #98FB98
+pale_red = #E78587
+pale_blue = #AFEEEE
+pale_yellow = #FFFACA
+;-------------------------------------------------
+;                                                ;
+;          			BAR MODULE 				     ;
+;                                                ;
+;-------------------------------------------------
+[bar/future]
+monitor = eDP1
+width = 85%
+height = 25
+offset-x = 7.5%
+offset-y = 1%
+fixed-center = true
+wm-restack = bspwm
+	
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+border-size = 2
+border-color = ${colors.foreground}
+
+modules-left = bspwm battery
+modules-center = time_icon date
+modules-right = pavolume network ram cpu powermenu
+font-0 = "Unifont:size=12:weight=bold;2"
+font-1 = "Font Awesome 5 Free,Font Awesome 5 Free Solid: style=Solid: size=12;2"
+font-2 = "Font Awesome 5 Free,Font Awesome 5 Free Regular: style=Regular: size=12;2"
+font-3 = "Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular;2" 
+;-------------------------------------------------
+;                                                ;
+;          			BSPWM PARAMETERS 		     ;
+;                                                ;
+;-------------------------------------------------
+[module/bspwm]
+type = internal/bspwm
+pin-workspaces = true
+inline-mode = true
+enable-click = false
+enable-scroll = false
+reverse-scroll = false
+fuzzy-match = false
+
+format = <label-state>
+
+ws-icon-0=1;1
+ws-icon-1=2;2
+ws-icon-2=3;3
+ws-icon-3=4;4
+ws-icon-4=5;5
+ws-icon-5=6;6
+ws-icon-6=7;7
+ws-icon-7=8;8
+
+;NOTE: YOU CANNOT HAVE NAME AND ICON
+;TOGETHER ONLY ONE OR THE OTHER!!
+
+label-focused = %icon%
+label-focused-foreground = ${colors.cyan} 
+label-focused-background = ${colors.blue} 
+label-focused-padding = 1
+
+label-focused-empty = %icon%
+label-focused-empty-foreground = ${colors.grey} 
+label-focused-empty-background = ${colors.blue} 
+label-focused-empty-padding = 1
+
+label-occupied = %icon%
+label-occupied-foreground = ${colors.white}
+label-occupied-padding = 1
+
+label-empty = %icon%
+label-empty-foreground = ${colors.grey}
+label-empty-padding = 1
+
+;-------------------------------------------------
+;                                                ;
+;          		DATE PARAMETERS		 		     ;
+;                                                ;
+;-------------------------------------------------
+[module/date]
+type = internal/date
+interval = 1.0
+date = %a, %d-%b
+time = %I:%M %p
+
+; if `date-alt` or `time-alt` is defined, clicking
+; the module will toggle between formats
+date-alt = %A, %d %B %Y
+time-alt = %r
+
+format = <label>
+format-foreground = ${colors.white}
+
+label = %date% %time%
+label-foreground = ${colors.white}
+
+;-------------------------------------------------
+;                                                ;
+;          		POWER MENU PARAMETERS		 	 ;
+;                                                ;
+;-------------------------------------------------
+[module/powermenu]
+type = custom/menu
+
+expand-right = false
+format-spacing = 1
+label-open = "  "
+label-open-alignment = right
+label-open-foreground = ${colors.white}
+label-close = " "
+label-close-foreground = ${colors.white}
+label-separator = |
+label-separator-foreground = ${colors.white}
+
+menu-0-0 = " "
+menu-0-0-exec = #powermenu.open.1
+menu-0-1 = 
+menu-0-1-exec = #powermenu.open.2
+
+menu-1-0 = " "
+menu-1-0-exec = reboot
+menu-1-0-foreground = ${colors.red}
+menu-1-1 = 
+
+menu-2-0 = " "
+menu-2-1 = 
+menu-2-1-foreground = ${colors.red}
+menu-2-1-exec = poweroff
+;-------------------------------------------------
+;                                                ;
+;          		RAM MODULE PARAMETERS		 	 ;
+;                                                ;
+;-------------------------------------------------
+[module/ram]
+type = internal/memory
+
+interval = 3
+format = <label>
+label =  %percentage_used%%
+label-padding = 1
+label-foreground = ${colors.pale_red}
+;-------------------------------------------------
+;                                                ;
+;          		CPU MODULE PARAMETERS		 	 ;
+;                                                ;
+;-------------------------------------------------
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+format = <label> <ramp-coreload>
+label = %percentage:2%%
+label-alignment = left
+label-foreground = ${colors.pale_blue}
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-foreground = ${colors.green}
+ramp-coreload-1 = ▂
+ramp-coreload-1-foreground = ${colors.green}
+ramp-coreload-2 = ▃
+ramp-coreload-2-foreground = ${colors.yellow}
+ramp-coreload-3 = ▄
+ramp-coreload-3-foreground = ${colors.yellow}
+ramp-coreload-4 = ▅
+ramp-coreload-4-foreground = ${colors.orange}
+ramp-coreload-5 = ▆
+ramp-coreload-5-foreground = ${colors.orange}
+ramp-coreload-6 = ▇
+ramp-coreload-6-foreground = ${colors.red}
+ramp-coreload-7 = █
+ramp-coreload-7-foreground = ${colors.red}
+
+
+;-------------------------------------------------
+;                                                ;
+;          		NETWORK PARAMETERS   	 ;
+;                                                ;
+;-------------------------------------------------
+
+[module/network]
+type = internal/network
+interface = wlp4s0
+interval = 1.0
+
+format-connected = <label-connected>
+label-connected = %{A1:nm-connection-editor:}%downspeed:8%%{A}
+label-connected-foreground = ${colors.pale_green}
+label-connected-padding = 1
+label-connected-alignment = right
+
+format-disconnected = <label-disconnected>
+label-disconnected = %{A1:nm-connection-editor:}%{A}
+label-disconnected-foreground = ${colors.red}
+label-disconnected-padding = 1
+label-disconnected-minlen = 8
+label-disconnected-alignment = right
+
+;-------------------------------------------------
+;                                                ;
+;          		BATTERY PARAMETERS   	 ;
+;                                                ;
+;-------------------------------------------------
+
+
+[module/battery]
+type = internal/battery
+
+; This is useful in case the battery never reports 100% charge
+full-at = 99
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT1
+adapter = ucsi-source-psy-USBC000:001
+
+; If an inotify event haven't been reported in this many
+; seconds, manually poll for new values.
+;
+; Needed as a fallback for systems that don't report events
+; on sysfs/procfs.
+;
+; Disable polling by setting the interval to 0.
+;
+; Default: 5
+poll-interval = 5
+
+; see "man date" for details on how to format the time string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+; Default: %H:%M:%S
+time-format = %H:%M
+
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>
+format-charging =  | <animation-charging> <label-charging>
+
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-discharging>
+format-discharging = | <ramp-capacity> <label-discharging>
+
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+format-full = | <ramp-capacity> <label-full>
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging = %percentage%%
+label-charging-foreground = ${colors.pale_yellow}
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+;   %time%
+;   %consumption% (shows current discharge rate in watts)
+label-discharging = %percentage%%
+label-discharging-foreground = ${colors.pale_yellow}
+
+label-full-foreground = ${colors.pale_green}
+
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.pale_yellow}
+ramp-capacity-0-foreground = ${colors.red}
+ramp-capacity-1-foreground = ${colors.red}
+ramp-capacity-4-foreground = ${colors.pale_green}
+
+; Only applies if <bar-capacity> is used
+bar-capacity-width = 10
+
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
+animation-charging-foreground = ${colors.yellow}
+
+; Only applies if <animation-discharging> is used
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+; Framerate in milliseconds
+animation-discharging-framerate = 500
+
+;--------------USER DEFINED MODULES---------------
+;These modules require scripts to run, you can find
+;the scripts and how to run them here:
+;https://github.com/jaagr/polybar/wiki/User-contributed-modules
+
+;-------------------------------------------------
+;                                                ;
+;          		VOLUME PARAMETERS   	 ;
+;                                                ;
+;-------------------------------------------------
+
+[module/pavolume]
+type = custom/script
+interval = 1
+label=%output%
+exec = ~/.config/polybar/pavolume.sh
+click-right = exec pavucontrol
+click-left = ~/.config/polybar/pavolume.sh --togmute
+scroll-up = ~/.config/polybar/pavolume.sh --up
+scroll-down = ~/.config/polybar/pavolume.sh --down
+label-padding = 0
+label-alignment = left
+label-foreground = ${colors.white}
+
+
+;-------------------------------------------------
+;                                                ;
+;          		TIME PARAMETERS   	 ;
+;                                                ;
+;-------------------------------------------------
+
+[module/time_icon]
+type = custom/script
+interval = 600
+label=%output%
+exec = ~/.config/polybar/time_icon.sh
+label-padding = 1
+label-alignment = left
