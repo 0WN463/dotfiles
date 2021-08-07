@@ -1,0 +1,10 @@
+set date_format="%e %b %y %a %I:%M%p"
+set sort = threads
+set sort_aux = reverse-date
+
+bind index \Co noop
+bind index,pager \Cl sidebar-open
+
+color sidebar_highlight blue default
+color index_flags brightred default "~D"
+exec sidebar-open
