@@ -9,7 +9,6 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
-
 fi
 
 if [ -f $sysmodmap ]; then
@@ -18,7 +17,6 @@ fi
 
 if [ -f "$userresources" ]; then
     xrdb -merge "$userresources"
-
 fi
 
 if [ -f "$usermodmap" ]; then
@@ -34,9 +32,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-if [[ $(xrandr -q | grep 'HDMI2 connected') ]]; then
-xrandr --output eDP1 --primary --mode 1366x768 --rotate normal --output HDMI2 --mode 1920x1080 --rotate normal --left-of eDP1
-fi
+#if [[ $(xrandr -q | grep 'HDMI2 connected') ]]; then
+#xrandr --output eDP1 --primary --mode 1366x768 --rotate normal --output HDMI2 --mode 1920x1080 --rotate normal --left-of eDP1
+#fi
 
 xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
 xsetroot -cursor_name left_ptr
