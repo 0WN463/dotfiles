@@ -1,0 +1,5 @@
+key_bindings:  
+  - { key: PageUp,   action: ScrollPageUp   }
+  - { key: PageDown, action: ScrollPageDown }
+  - { key: End,      mods: Shift,   action: ScrollToBottom }
+  - { key: Home,     mods: Shift,   action: ScrollToTop    }
