@@ -3,7 +3,11 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 &
-~/.local/bin/startup 
+
+if [[ $(xrandr -q | grep 'HDMI2 connected') ]]; then
+	~/.local/bin/manage_workspaces.sh add
+fi
+~/.local/bin/startup
 
 bspc config border_width         2
 bspc config window_gap          12
@@ -18,8 +22,11 @@ bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
+
 # source the colors.
-. "${HOME}/.cache/wal/colors.sh"
+. ~/.cache/wal/colors.sh
 
 # Set the border colors.
 bspc config normal_border_color "$color15"

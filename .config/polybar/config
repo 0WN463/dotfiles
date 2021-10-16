@@ -17,9 +17,11 @@ cyan  = #00FFFF
 white = #FFFFFF
 green = #00FF00
 yellow = #FFFF00
+gold = #F8E605
 orange = #FFA500
 red = #FF0000
 grey = #555588
+light_grey = #666699
 
 pale_green = #98FB98
 pale_red = #E78587
@@ -34,6 +36,7 @@ pale_yellow = #FFFACA
 monitor = eDP1
 width = 85%
 height = 25
+line-size = 2
 offset-x = 7.5%
 offset-y = 1%
 fixed-center = true
@@ -52,6 +55,31 @@ font-0 = "Unifont:size=12:weight=bold;2"
 font-1 = "Font Awesome 5 Free,Font Awesome 5 Free Solid: style=Solid: size=12;2"
 font-2 = "Font Awesome 5 Free,Font Awesome 5 Free Regular: style=Regular: size=12;2"
 font-3 = "Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular;2" 
+
+[bar/external]
+monitor = HDMI2
+width = 85%
+height = 25
+line-size = 2
+offset-x = 7.5%
+offset-y = 1%
+fixed-center = true
+wm-restack = bspwm
+	
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+border-size = 2
+border-color = ${colors.foreground}
+
+modules-left = bspwm battery
+modules-center = time_icon date
+modules-right = pavolume network ram cpu powermenu
+font-0 = "Unifont:size=12:weight=bold;2"
+font-1 = "Font Awesome 5 Free,Font Awesome 5 Free Solid: style=Solid: size=12;2"
+font-2 = "Font Awesome 5 Free,Font Awesome 5 Free Regular: style=Regular: size=12;2"
+font-3 = "Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular;2" 
+
 ;-------------------------------------------------
 ;                                                ;
 ;          			BSPWM PARAMETERS 		     ;
@@ -80,9 +108,16 @@ ws-icon-7=8;8
 ;NOTE: YOU CANNOT HAVE NAME AND ICON
 ;TOGETHER ONLY ONE OR THE OTHER!!
 
+label-dimmed-occupied-underline = ${colors.background} 
+label-dimmed-empty-underline = ${colors.background} 
+label-dimmed-focused-underline = ${colors.blue} 
+
+label-focused-underline = ${colors.gold} 
+label-focused-empty-underline = ${colors.gold} 
+
 label-focused = %icon%
-label-focused-foreground = ${colors.cyan} 
 label-focused-background = ${colors.blue} 
+label-focused-foreground = ${colors.cyan} 
 label-focused-padding = 1
 
 label-focused-empty = %icon%
