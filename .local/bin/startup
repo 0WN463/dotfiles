@@ -1,0 +1,5 @@
+#! /bin/sh
+
+feh --bg-center ~/.local/share/wallpaper/furudo_erika_borderless.jpg
+bspc desktop --focus 1
+$HOME/.config/polybar/launch.sh
