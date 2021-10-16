@@ -56,6 +56,9 @@ super + XF86MonBrightnessUp
 super + XF86MonBrightnessDown
 	xbacklight -dec 1;
 
+super + b
+	~/.local/bin/toggle_picom.sh;
+
 # Send to desktop
 # super + shift + {1-9,0}
 #     bspc node -d '^{1-9,10}' --follow
