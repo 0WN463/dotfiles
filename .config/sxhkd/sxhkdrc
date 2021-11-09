@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + @space
-	rofi -show drun -show-icons -m -1
+	rofi -show drun -show-icons -m -1 -config ~/.config/rofi/keybinding.rasi
 
 # Show help
 super + slash
@@ -142,6 +142,10 @@ super + {_,shift + }c
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
+
+# move node to next/previous desktop 
+super + shift + bracket{left,right}
+	bspc node -d {prev,next}.local
 
 # focus the last node
 super + grave
