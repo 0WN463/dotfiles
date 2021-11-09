@@ -5,7 +5,6 @@ set sort_aux = reverse-date
 bind index \Co noop
 bind index,pager \Cl sidebar-open
 
-color sidebar_indicator blue default
-color sidebar_highlight brightblack white
+color sidebar_indicator black brightblue
+color sidebar_highlight brightblack blue
 color index_flags brightred default "~D"
-exec sidebar-open
