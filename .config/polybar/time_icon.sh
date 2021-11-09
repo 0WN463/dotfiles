@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
 function output() {
-    currHour=$(date +"%H")
-    if [ $currHour -ge 8 ] && [ $currHour -lt 19 ]
+    if [ "$(redshift -p | head -n1 | cut -d' ' -f2)" == "Night" ]
     then
-        echo "%{F#E78587}"
-    else
         echo "%{F#AFEEEE}"
+    else
+        echo "%{F#E78587}"
     fi
 } 
 
