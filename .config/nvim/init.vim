@@ -30,3 +30,5 @@ xnoremap <S-Down> dpV`]
 xnoremap <S-Up> dkPV`]
 
 source $HOME/.config/nvim/vim-plug/plugins.vim
+
+colorscheme wal
