@@ -15,6 +15,7 @@ nnoremap <C-Up> 5k
 nnoremap <C-Down> 5j
 nnoremap H ^
 nnoremap L $
+inoremap jk <Esc>
 
 nnoremap <Leader>r :e!<CR>
 nnoremap <Leader>s :w<CR>
