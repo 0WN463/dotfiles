@@ -6,3 +6,11 @@
 	 background: rgba(255, 0, 0) !important;
 }
 
+.MathJax_Display {
+	color: lightgrey	
+}
+
+img {
+	filter: invert(1)
+}
+
