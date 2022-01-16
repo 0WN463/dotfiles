@@ -26,6 +26,9 @@ super + g
 super + y
 	~/scripts/search_youtube.sh
 
+Print
+	scrot --select -e 'xclip -selection clipboard -t image/png -i $f;rm $f'
+
 # Audio 
 XF86AudioRaiseVolume
 	active_sink=$(pacmd list-sinks | awk '/* index:/\{print $3\}'); \
