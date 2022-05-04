@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 function output() {
     if [ "$(redshift -p | head -n1 | cut -d' ' -f2)" == "Night" ]
