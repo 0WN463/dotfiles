@@ -1,0 +1,23 @@
+#!/bin/sh
+dunst_id=36
+while read -r line; do 
+    case $line in
+        H*)
+            [ -z "$chain" ] && hk="${line#?}"
+            ;;
+        B*)
+            chain="$hk"
+            case "$chain" in
+                'super + s')
+                    dunstify -r $dunst_id --timeout=0 'Resize'
+                    ;;
+		 *)
+		    dunstify -r $dunst_id --timeout=0 "$chain"
+            esac
+            ;;
+        E*)
+            unset chain
+            dunstify --close=$dunst_id
+            ;;
+    esac
+done <"$1"

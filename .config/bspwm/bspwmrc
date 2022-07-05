@@ -1,6 +1,8 @@
 #! /bin/sh
 
-pgrep -x sxhkd > /dev/null || sxhkd &
+mkfifo /tmp/sxhkd_pipe
+pgrep -x sxhkd > /dev/null || sxhkd -s /tmp/sxhkd_pipe &
+~/.local/bin/sxhkd_notif /tmp/sxhkd_pipe &
 
 bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 &
 
