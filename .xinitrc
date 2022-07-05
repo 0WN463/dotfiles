@@ -41,6 +41,6 @@ xsetroot -cursor_name left_ptr
 
 imwheel --kill &
 picom &
-redshift -x; redshift -c ~/.config/redshift.conf &
+redshift -x; redshift &
 dunst &
 exec bspwm
