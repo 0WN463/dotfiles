@@ -1,9 +1,10 @@
-.cm-s-ipython, .CodeMirror-cursor {border-left: 3px solid #838184 !important;}
+.cm-s-ipython, .CodeMirror-cursor {border-left: 8px solid #838184 !important;}
 
 .cm-s-ipython .CodeMirror-matchingbracket { color: pink !important;}
 
-.CodeMirror .cm-spell-error:not(.cm-url):not(.cm-tag):not(.cm-word) {
-	 background: rgba(255, 0, 0) !important;
+body .CodeMirror .cm-spell-error:not(.cm-url):not(.cm-tag):not(.cm-word) {
+	 background: rgba(255, 0, 0, 0.5) !important;
+	 color: cyan;
 }
 
 .MathJax_Display {
