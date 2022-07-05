@@ -59,4 +59,16 @@ key[Control-Right]="${terminfo[kRIT5]}"
 [[ -n "${key[Control-Left]}"  ]] && bindkey -- "${key[Control-Left]}"  backward-word
 [[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word
 
-alias cgit='/usr/bin/git --git-dir=/home/own3d/.cfg/.git/ --work-tree=/home/own3d'
+### Plugins
+source /home/own3d/.config/zsh_plugin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /home/own3d/.config/zsh_plugin/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /home/own3d/.config/zsh_plugin/zsh-auto-notify/auto-notify.plugin.zsh
+
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#FF0000'
+ZSH_HIGHLIGHT_STYLES[command]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
+
+bindkey '^U' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+bindkey '^K' autosuggest-accept
