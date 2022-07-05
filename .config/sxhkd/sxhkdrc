@@ -12,19 +12,35 @@ super + @space
 
 # show help
 super + slash
-	~/scripts/sxhkd-help.sh
+	~/scripts/sxhkd_help
 
 # generate random password and put to clipboard
 super + p
-	~/scripts/generate_random_password.sh | xclip -selection clipboard
+	~/scripts/generate_random_password | xclip -selection clipboard
+
+# 
+super + shift + s
+	~/scripts/autopass $(cat ~/.secret/spass)
+
+# jumps the cursor to the other monitor
+super + m
+	~/scripts/jump_cursor.py
 
 # search Google for results
 super + g
-	~/scripts/search_google.sh
+	~/scripts/search_google
+
+# search Google for results
+super + shift + g
+	~/scripts/search_google_basic
 
 # search YouTube for results
 super + y
-	~/scripts/search_youtube.sh
+	~/scripts/search_youtube
+
+# search Reddit for results
+super + r
+	~/scripts/search_reddit
 
 # interactive scrot to clipboard
 Print

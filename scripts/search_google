@@ -1,0 +1,19 @@
+#!/usr/bin/sh
+set -euo pipefail
+query="$(echo "" | rofi -dmenu -p "Google" -m -1 | sed 's/ /+/g')"
+results=$(curl --get https://serpapi.com/search \
+  -d q="$query"\
+  -d hl='en' \
+  -d gl='us' \
+  -d google_domain='google.com' \
+  -d num=20 \
+ -d api_key=$(cat ~/.secret/serpapi_token))
+
+max_len=40
+titles=$(echo $results | jq -r '.organic_results | map(.title) | .[]' | sed -e 's/|//g' -e 's/\(.\{'$(($max_len - 3))'\}\).*/\1.../' | awk '{printf "%-'$max_len's\n", $0}')
+links=$(echo $results | jq -r '.organic_results | map(.link) | .[]')
+short_links=$(echo "$links" | rg  '^.*?//(www\.)?(.*?)/.*' -r '$2')
+
+index=$(paste --d '|' <(echo "$titles") <(echo "$short_links") | rofi -dmenu -config ~/.config/rofi/keybinding.rasi -m -1 -format 'd')
+link=$(echo "$links" | sed $index"q;d")
+librewolf "$link" &

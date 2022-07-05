@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+curl --silent "https://api.telegram.org/bot$(cat ~/.secret/telegram_bot_token.txt)/sendMessage?chat_id=-648628694&text=$1" 1>/dev/null

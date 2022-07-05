@@ -1,0 +1,1 @@
+echo "" | rofi -dmenu -p "Google" -m -1 | xargs -I{} librewolf "https://www.google.de/search?q={}"

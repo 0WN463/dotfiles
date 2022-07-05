@@ -1,0 +1,10 @@
+#!/usr/bin/python
+import sys
+from pynput.keyboard import Key, Controller
+
+_, sec = sys.argv
+
+keyboard = Controller()
+
+for c in sec:
+    keyboard.press(c)

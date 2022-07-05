@@ -1,0 +1,1 @@
+echo "" | rofi -dmenu -p "YouTube" -m -1 | xargs -I{} librewolf "https://www.youtube.com/results?search_query={}"
