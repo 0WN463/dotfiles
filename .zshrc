@@ -1,10 +1,12 @@
 export EDITOR=nvim
 export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/scripts
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt extendedglob
+setopt share_history
 unsetopt autocd beep
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
