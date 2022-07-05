@@ -22,8 +22,9 @@ alias grep=rg
 alias xclip="xclip -sel clip"
 alias cl=clear
 alias open=xdg-open
-alias cython=~/.local/bin/cython
-#alias feh="feh --auto-zoom --scale-down"
+alias cgit='/usr/bin/git --git-dir=/home/own3d/.cfg/.git/ --work-tree=/home/own3d'
+alias clip='fc -ln -1 | xclip'
+alias feh="feh --auto-zoom --scale-down"
 
 # Import colorscheme from 'wal' asynchronously
 (cat ~/.cache/wal/sequences &)
