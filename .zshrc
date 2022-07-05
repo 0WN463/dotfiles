@@ -52,6 +52,13 @@ key[Down]="${terminfo[kcud1]}"
 
 [[ -n "${key[Up]}"   ]] && bindkey -- "${key[Up]}"   up-line-or-beginning-search
 [[ -n "${key[Down]}" ]] && bindkey -- "${key[Down]}" down-line-or-beginning-search
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+bindkey "^?" backward-delete-char
+
+bindkey '^U' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+bindkey '^K' autosuggest-accept
 
 key[Control-Left]="${terminfo[kLFT5]}"
 key[Control-Right]="${terminfo[kRIT5]}"
@@ -68,7 +75,3 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#FF0000'
 ZSH_HIGHLIGHT_STYLES[command]='fg=blue,bold'
 ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
-
-bindkey '^U' history-beginning-search-backward
-bindkey '^N' history-beginning-search-forward
-bindkey '^K' autosuggest-accept
