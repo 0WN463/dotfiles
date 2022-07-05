@@ -1,11 +1,24 @@
 #!/usr/bin/env sh
 
+function format() {
+    no_color="$1"
+    text="$2"
+    if [ "${no_color}" != "" ]; then
+	echo ${text}
+    else
+	echo "%{F#AFEEEE}${text}%{F-}"
+    fi
+}
+
 function main() {
     # Pipewire
     #SOURCE=$(pw-record --list-targets | sed -n 's/^*.*"\(.*\)" prio=.*$/\1/p')
-    SINK=$(pw-play --list-targets | sed -n 's/^*.*"\(.*\)" prio=.*$/\1/p')
-    VOLUME=$(pactl list sinks | sed -n "/${SINK}/,/Volume/ s!^[[:space:]]\+Volume:.* \([[:digit:]]\+\)%.*!\1!p")
-    IS_MUTED=$(pactl list sinks | sed -n "/${SINK}/,/Mute/ s/Mute: \(yes\)/\1/p")
+    #SINK=$(pw-play --list-targets | sed -n 's/^*.*"\(.*\)" prio=.*$/\1/p')
+    curr_sink_name=$(pactl info | awk -F : '/Default Sink:/{print $2}')
+    curr_sink=$(pactl list sinks short | grep $curr_sink_name | awk '{print $1}')
+    VOLUME=$(pactl list sinks | sed -n "/$curr_sink/,/Volume/ s!^[[:space:]]\+Volume:.* \([[:digit:]]\+\)%.*!\1!p")
+    IS_MUTED=$(pactl list sinks | sed -n "/$curr_sink/,/Mute/ s/Mute: \(yes\)/\1/p")
+    IS_RUNNING=$(pactl list sinks | sed -n "/$curr_sink/,/State/ s/State: \(RUNNING\)/\1/p")
     active_port=$(pactl list sinks | rg "^\s*Active Port: (\S*)$" -r '$1')
 
     action=$1
@@ -15,6 +28,8 @@ function main() {
         pactl set-sink-volume @DEFAULT_SINK@ -10%
     elif [ "${action}" == "mute" ]; then
         pactl set-sink-mute @DEFAULT_SINK@ toggle
+    elif [ "${action}" == "output" ]; then
+	echo "${IS_MUTED}"
     else
 	case $active_port in 
             "analog-output-headphones")
@@ -27,8 +42,9 @@ function main() {
                 icon="?"
 	esac
 
+	icon=$(format "$IS_RUNNING" "$icon")
         if [ "${IS_MUTED}" != "" ]; then
-            echo "$icon  MUTED"
+	    echo "$icon  MUTED"
         else
             echo "$icon ${VOLUME}%"
         fi

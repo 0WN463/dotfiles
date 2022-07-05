@@ -36,20 +36,17 @@ super + b
 
 # audio
 XF86AudioRaiseVolume
-	active_sink=$(pacmd list-sinks | awk '/* index:/\{print $3\}'); \
-	pactl set-sink-volume $active_sink +5%; \
-	vol=$(pacmd list-sinks | rg '^\t+volume:' | cut -d'/' -f2); \
+	pactl set-sink-volume @DEFAULT_SINK@ +5%
+	vol=$(pactl list sinks | sed -n "/${SINK}/,/Volume/ s!^[[:space:]]\+Volume:.* \([[:digit:]]\+\)%.*!\1!p")
 	dunstify -r 42 "$vol";
 
 XF86AudioLowerVolume
-	active_sink=$(pacmd list-sinks | awk '/* index:/\{print $3\}'); \
-	pactl set-sink-volume $active_sink -5%; \
-	vol=$(pacmd list-sinks | rg '^\t+volume:' | cut -d'/' -f2); \
+	pactl set-sink-volume @DEFAULT_SINK@ -5%
+	vol=$(pactl list sinks | sed -n "/${SINK}/,/Volume/ s!^[[:space:]]\+Volume:.* \([[:digit:]]\+\)%.*!\1!p")
 	dunstify -r 42 "$vol";
 
 XF86AudioMute
-	active_sink=$(pacmd list-sinks | awk '/* index:/\{print $3\}'); \
-	pactl set-sink-mute $active_sink toggle;
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # brightness
 XF86MonBrightnessUp
