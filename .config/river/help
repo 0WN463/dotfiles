@@ -1,0 +1,7 @@
+#!/bin/bash
+# Used for rofi to display help on river
+rg '^\s*#(.*)\n\s*riverctl map (.*?) (.*? .*?) .*? .*' --multiline --only-matching --replace '$1'$'\t''$3' "$HOME/.config/river/init" |
+	awk '!x[$0]++' |
+	column --table --separator $'\t' | 
+	fuzzel --dmenu --width 100
+	# rofi -dmenu -i -markup-rows -no-show-icons -width 1000 -lines 15 -yoffset 40 -monitor primary -config ~/.config/rofi/keybinding.rasi
