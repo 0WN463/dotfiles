@@ -5,3 +5,4 @@ key_bindings:
   - { key: PageDown, mods: Shift,   action: ScrollLineDown }
   - { key: End,      mods: Shift,   action: ScrollToBottom }
   - { key: Home,     mods: Shift,   action: ScrollToTop    }
+  - { key: Return,   mods: Control, action: SpawnNewInstance }
